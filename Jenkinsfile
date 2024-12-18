@@ -27,7 +27,7 @@ pipeline {
                     reuseNode true
                 }
             }
-            steps{
+            steps {
                 sh '''
                 test -f build/intex.html
                 npm test
