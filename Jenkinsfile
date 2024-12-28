@@ -55,9 +55,6 @@ environment {
                             reuseNode true
                         }
                     }
-                    environment {
-                        CI_ENVIRONMENT_URL = 'https://bespoke-biscotti-415d8c.netlify.app'
-                    }
                     steps {
                         sh '''
                         npm install serve
@@ -99,6 +96,9 @@ environment {
                     image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
                     reuseNode true
                 }
+            }
+            environment {
+                CI_ENVIRONMENT_URL = 'https://bespoke-biscotti-415d8c.netlify.app'
             }
             steps {
                 sh '''
