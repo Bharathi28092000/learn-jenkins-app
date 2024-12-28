@@ -55,6 +55,9 @@ environment {
                             reuseNode true
                         }
                     }
+                    environment {
+                        CI_ENVIRONMENT_URL = 'https://bespoke-biscotti-415d8c.netlify.app'
+                    }
                     steps {
                         sh '''
                         npm install serve
@@ -65,7 +68,7 @@ environment {
                     }
                     post {
                         always{
-                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'PlaywrightHTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright Local', reportTitles: '', useWrapperFileDirectly: true])
                         }
                     }
                 }
@@ -90,5 +93,24 @@ environment {
                 '''
             }
         }
+    stage('Prod E2E') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                npx playwright test --reporter=html
+                '''
+            }
+            post {
+                always{
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright E2E', reportTitles: '', useWrapperFileDirectly: true])
+                }
+            }
+        }
+
     }
 }
