@@ -89,7 +89,7 @@ environment {
                 '''
             }
         }
-         stage('Approval') {
+        stage('Approval') {
             steps {
                 (time: 1, unit: 'MINUTES')
                 input message: 'Do you wish to deploy to production ?', ok: 'Yes, I am sure !'
