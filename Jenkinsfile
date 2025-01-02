@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-environment {
+ environment {
     NETLIFY_SITE_ID = '1fb5ca35-ae29-4100-8934-4d45f8fd20f0'
     NETLIFY_AUTH_TOKEN = credentials('netlify-token')
-}
+ }
     stages {
     
         stage('Build') {
@@ -87,9 +87,9 @@ environment {
                 node_modules/.bin/netlify status
                 node_modules/.bin/netlify deploy --dir=build --json > deploy-output.jason                
                 '''
-            }
-            script {
-                env.STAGING_URL = sh(script:"node_modules/.bin/node-jq -r '.deploy_url' deploy-output.jason", returnStdout: true)
+                script {
+                    env.STAGING_URL = sh(script:"node_modules/.bin/node-jq -r '.deploy_url' deploy-output.jason", returnStdout: true)
+                }
             }
         }
         stage('Staging E2E') {
