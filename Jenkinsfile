@@ -8,11 +8,10 @@ environment {
 }
     stages {
     
-        stage('Docker'){
+        stage('Docker') {
             steps{
-             sh 'dockerbuild -t my-playwright .'
+             sh 'docker build -t my-playwright .'
             }
-        
         }
         stage('Build') {
             agent {
