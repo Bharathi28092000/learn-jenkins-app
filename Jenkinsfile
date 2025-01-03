@@ -10,7 +10,7 @@ environment {
     
         stage('Docker'){
             steps{
-             sh 'dockerbuild -t mu-playwright .'
+             sh 'dockerbuild -t my-playwright .'
             }
         
         }
