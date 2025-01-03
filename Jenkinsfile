@@ -8,6 +8,12 @@ environment {
 }
     stages {
     
+        stage('Docker'){
+            steps{
+             sh 'dockerbuild -t mu-playwright .'
+            }
+        
+        }
         stage('Build') {
             agent {
                 docker {
